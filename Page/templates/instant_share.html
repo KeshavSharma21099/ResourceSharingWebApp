@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Instant Share{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+	<form method="POST" class="form-group">
+		{% csrf_token %}
+        {{user_form|crispy}}
+		{{page_form|crispy}}
+		<button type="submit" class="btn btn-success">Send</button>
+	</form>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}{{parent.name}}{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+      {% for i in path %}
+      <li class="breadcrumb-item"><a href="/{{i.pk}}/">{{i.name}}</a></li>
+      {% endfor %}
+  </ol>
+</nav>
+<h1>{{parent.name}}</h1>
+<a href="edit-directory/" class="btn btn-primary">Edit</a>
+<a href="send-directory/" class="btn btn-primary">Share</a>
+<a href="create-directory/" class="btn btn-primary">Add Directory</a>
+<a href="new-page/" class="btn btn-primary">Add Page</a>
+<a href="delete-directory/" class="btn btn-danger">Delete</a>
+{% if directories %}
+<h2 style="margin:2%">Directories</h2>
+{% for i in directories %}
+<div class="card bg-light border" style="margin: 1%">
+    <h5 class="card-header" style="padding:1%">
+        {{i.name}}
+    </h5>
+    <div class="card-body border-top">
+        <p class="card-title">{{i.subject}}</p>
+        <a href="/{{i.pk}}/" class="btn btn-primary">Open</a>
+        <a href="/{{i.pk}}/edit-directory/" class="btn btn-primary">Edit</a>
+        <a href="/{{i.pk}}/send-directory/" class="btn btn-primary">Share</a>
+        <a href="/{{i.pk}}/delete-directory/" class="btn btn-danger">Delete</a>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{% if pages %}
+<h2 style="margin:2%">Pages</h2>
+{% for i in pages %}
+<div class="card bg-light border" style="margin: 1%">
+    <h5 class="card-header" style="padding:1%">
+        {{i.title}}
+    </h5>
+    <div class="card-body border-top">
+        <p class="card-title">{{i.comments}}</p>
+        <p class="card-body" style="text-overflow: hidden">{{i.link}}</p>
+        <a href="{{i.link}}" target="_blank" class="btn btn-primary">Visit</a>
+        <a href="/{{i.pk}}/send-page/" class="btn btn-primary">Share</a>
+        <a href="/{{i.pk}}/delete-page/" class="btn btn-danger">Delete</a>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{% if not directories and not pages %}
+<h1>Empty</h1>
+{% endif %}
+{% endblock %}

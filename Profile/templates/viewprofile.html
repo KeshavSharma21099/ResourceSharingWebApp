@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}{{user.username}}{% endblock %}
+
+{% block content %}
+<h1>{{profile.name}}</h1>
+<h3>({{profile.user.username}})</h3>
+<ul>
+    <li>Mail: {{profile.mail}}</li>
+    <li>Born: {{profile.birth_date}}</li>
+    <li>Location: {{profile.location}}</li>
+    <li>Date Joined: {{profile.user.date_joined}}</li>
+    <li>Gender: {{gender}}</li>
+</ul>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+
+
+<!--<h1>Welcome {{user.username}}</h1>-->
+<!--{% for i in directories %}-->
+<!--    <a href="/{{i.pk}}"><li>{{i.pk}}: {{i.name}}</li></a>-->
+<!--{% endfor %}-->
